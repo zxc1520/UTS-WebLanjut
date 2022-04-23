@@ -23,10 +23,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 
 // Login - register
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
-Route::get('/register', [RegisterController::class, 'index']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
+Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
 // Editable Pages
@@ -50,7 +50,7 @@ Route::post('/pengajar/edit/{id}', [PengajarController::class, 'edit']);
 Route::get('/pengajar/delete/{id}', [PengajarController::class, 'delete']);
 
 // Dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 Route::get('/artikeldash', [ArtikelController::class, 'dashboard']);
 Route::post('/artikeldash', [ArtikelController::class, 'store']);
 Route::get('/pengajardash', [PengajarController::class, 'base'])->middleware('auth');

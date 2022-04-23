@@ -18,17 +18,19 @@ class LoginController extends Controller
     {
         # code...
         $credentials = $req->validate([
-            'email' => 'required|email',
+            'emaill' => 'required|email',
             'password' => 'required'
         ]);
 
         if (Auth::attempt($credentials)) {
             # code...
             $req->session()->regenerate();
-            return redirect()->intended('/dashboard')->with('toast_success', 'berhasil login');
+            return redirect()
+                    ->intended('/dashboard')
+                    ->with('toast_success', 'berhasil login');
         }
 
-        return back()->with('loginError', 'Kesalahan Login');
+        return back()->withErrors('errors', 'Kesalahan Login');
     }
 
     public function logout(Request $req)

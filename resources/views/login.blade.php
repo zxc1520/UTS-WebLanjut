@@ -14,16 +14,14 @@
             {{ session('loginError') }}
         </div>
         @endif
-        <form action="/login" method="POST">
+        <form action="/login" method="POST" enctype="multipart/form-data">
             @csrf
             <!-- Email input -->
             <div class="form-outline mb-4">
-                <input type="email" name="email" id="email" class="form-control @error('email')
-                    is-invalid
-                @enderror" required value="{{ old('email') }}" />
+                <input type="email" name="email" class="form-control" value="{{ old('email') }}" />
                 @error('email')
                 <div class="invalid-feedback">
-                    {{ $message }}
+                    <strong>{{ $message }}</strong>
                 </div>
                 @enderror
                 <label class="form-label" for="email">Email address</label>
@@ -31,12 +29,10 @@
 
             <!-- Password input -->
             <div class="form-outline mb-4">
-                <input type="password" name="password" id="password" class="form-control @error('password')
-                    is-invalid
-                @enderror" required value="{{ old('password') }}" />
+                <input type="password" name="password" class="form-control" value="{{ old('password') }}" />
                 @error('password')
                 <div class="invalid-feedback">
-                    {{ $message }}
+                    <strong>{{ $message }}</strong>
                 </div>
                 @enderror
                 <label class="form-label" for="password">Password</label>
@@ -52,6 +48,9 @@
             </div>
         </form>
     </div>
+
+
+    @include('sweetalert::alert')
 
 </section>
 
